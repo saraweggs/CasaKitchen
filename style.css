@@ -1,0 +1,21 @@
+body {
+  background-color: ghostwhite;
+}
+
+h1 {
+  font-family: 'Sacramento', cursive;
+  font-size: 100px;
+}
+
+.container {
+  margin: 10px 30px 20px 30px;
+}
+
+div {
+  font-size: 20px;
+  font-family: 'Arapey', serif;
+}
+
+h2 {
+  font-family: 'Arapey', serif;
+}

@@ -29,17 +29,17 @@ $(() => {
           const recipeImg = data.hits[i].recipe.image;
           const ingredients = data.hits[i].recipe.ingredientLines;
 
-          // Building Divs for each recipe returned: 
+          // Building Divs for each recipe returned:
 
             const $recipeContainer = $('<div>').addClass('container')
             $('.list').append($recipeContainer);
-            const $recipes = $('<div>');
-            // $recipes.attr('src', recipeImg);
-            $recipes.text(label)
-            $recipeContainer.append($recipes);
             const $recipePic = $('<img>')
             $recipePic.attr('src', recipeImg);
-            $recipes.append($recipePic)
+            $recipeContainer.append($recipePic)
+            const $recipes = $('<div>').addClass('recipe-box')
+            $recipes.text(label)
+            $recipeContainer.append($recipes);
+
 
 
         }
