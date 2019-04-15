@@ -47,7 +47,25 @@ $(() => {
     })
   });
 
-  // DISPLAYING THE RESULTS:
+  // HEADER SLIDESHOW:
+
+let currentImgIndex = 0;
+let numOfImages = $('.slides').children().length - 1;
+let $currentImage = $('.slides').children();
+
+const slideshow = () => {
+  $currentImage.eq(currentImgIndex).hide();
+  if (currentImgIndex < numOfImages) {
+    currentImgIndex++;
+  } else {
+    currentImgIndex = 0;
+  }
+  $currentImage.eq(currentImgIndex).show();
+
+    setTimeout(slideshow, 2000);
+}
+
+slideshow();
 
 
 
