@@ -6,13 +6,13 @@
   <script src="app.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Arapey|Sacramento" rel="stylesheet">
-    <title>Love&Lemons</title>
+    <title>CasaKitchen</title>
 </head>
 <body>
-
-  <h1>CasaKitchen</h1>
+<div class="content">
 
   <section class="header">
+    <img src="./images/logo.png" alt="logo" class="logo"/>
     <div class="slides">
       <img src="./images/headerpic2.jpg" class="header-img">
     </div>
@@ -22,18 +22,25 @@
   <div class="slides">
     <img src="./images/headerpic5.jpg" class="header-img">
   </div>
-  <div class="slides">
+  <!-- <div class="slides">
     <img src="./images/headerpic4.jpg" class="header-img">
-  </div>
+  </div> -->
   </section>
 
 <form>
-  <input type="text" placeholder="What do you have on hand?"/>
-  <input type="submit" value="search recipes"/>
+  <input type="text" placeholder="What do you have on hand?" class="input-box"/>
+  <input type="submit" value="search recipes" class="submit-button"/>
+  <br>
+  <input type="checkbox" id="glutenCheck" class="diet-checkbox"/><label for="glutenCheck">Gluten-Free</label>
+  <input type="checkbox" id="VegetarianCheck" class="diet-checkbox"/><label for="VegetarianCheck">Vegetarian</label>
+    <input type="checkbox" id="VeganCheck" class="diet-checkbox"/><label for="VeganCheck">Vegan</label>
   </form>
 
-<h2 class="list">Pick a recipe:</h2>
+<h2 class="list">Create your next meal using ingredients you already have at home!</h2>
 
+<div class="container"></div>
+
+</div>
 
 </body>
 </html>

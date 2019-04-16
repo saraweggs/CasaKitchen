@@ -10,17 +10,17 @@ $(() => {
 
   $('form').on('submit', (event) => {
     event.preventDefault();
-      // Input Value: Food nuser wants to search for:
+      // Input Value: Food user wants to search for:
     const inputValue = $('input[type="text"]').val()
 
-    const requestUrl = url + 'q=' + inputValue + '&app_id=' + app_id + '&app_key=' + app_key + '&from=0&to=10';
+    const requestUrl = url + 'q=' + inputValue + '&app_id=' + app_id + '&app_key=' + app_key + '&from=0&to=100';
 
     $.ajax({
       url: requestUrl,
       dataType: "jsonp",
       success: function(data) {
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 99; i++) {
           const recipeData = data.hits[i].recipe;
           console.log(data.hits[i].recipe.label);
 
@@ -31,16 +31,14 @@ $(() => {
 
           // Building Divs for each recipe returned:
 
-            const $recipeContainer = $('<div>').addClass('container')
-            $('.list').append($recipeContainer);
-            const $recipePic = $('<img>')
+            const $recipeContainer = $('<div>').addClass('recipe-box')
+            $('.container').append($recipeContainer);
+            const $recipePic = $('<img>').addClass('recipe-img');
             $recipePic.attr('src', recipeImg);
             $recipeContainer.append($recipePic)
-            const $recipes = $('<div>').addClass('recipe-box')
+            const $recipes = $('<a>').addClass('recipe-name').attr('href', recipeUrl);
             $recipes.text(label)
             $recipeContainer.append($recipes);
-
-
 
         }
       }
@@ -62,7 +60,7 @@ const slideshow = () => {
   }
   $currentImage.eq(currentImgIndex).show();
 
-    setTimeout(slideshow, 2000);
+    setTimeout(slideshow, 3000);
 }
 
 slideshow();
