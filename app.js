@@ -76,6 +76,7 @@ slideshow();
           const totalCals = Math.floor(calories/serves);
           const totalFat = Math.floor(fat/serves);
           const totalCarbs = Math.floor(carbs/serves);
+          const nutrition = 'This recipe has ' + totalCals + ' total calories, ' + totalFat + ' grams of fat, and ' + totalCarbs +  ' grams of carbohydrates per serving.';
 
           console.log(totalCals);
 
@@ -86,16 +87,27 @@ slideshow();
             const $recipePic = $('<img>').addClass('recipe-img');
             $recipePic.attr('src', recipeImg);
             $recipeContainer.append($recipePic)
+            const $nutritionFacts = $('<div>').addClass('nutrition');
+            $nutritionFacts.text(nutrition);
+            const $ingredientsBtn = $('<button>').addClass('modalBtn').text('Click to see the ingredients!');
+            $recipeContainer.append($nutritionFacts);
+            $nutritionFacts.append($ingredientsBtn);
             const $recipes = $('<a>').addClass('recipe-name').attr('href', recipeUrl);
             $recipes.text(label)
             $recipeContainer.append($recipes);
 
-            const listNutrition = () => {
-              const $nutrition = $('<p>').text(`This recipe has ${totalCals} total calories, ${totalFat} total fat, and ${totalCarbs} total carbohydrates per serving.`)
-              $('recipe-box').append($nutrition);
-            }
+      // Hover over image to show recipe nutrition facts:
 
-            $('.recipe-box').on('click', listNutrition);
+          const showNutrition = (event) => {
+            $(event.currentTarget).css('z-index', 1);
+          }
+
+          const hideNutrition = () => {
+            $('.nutrition').css('z-index', 0);
+            $('.recipe-img').css('z-index', 1);
+          }
+
+            $('.recipe-img').hover(showNutrition, hideNutrition);
 
         }
       }
@@ -111,7 +123,7 @@ slideshow();
     $('.modal').append($recipeList);
   }
 
-  $('.recipe-box').on('click', openModal)
+  $('.modalBtn').on('click', openModal)
 
 
 

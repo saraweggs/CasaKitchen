@@ -1,8 +1,11 @@
+body {
+  background-color: lightblue;
+}
 
 .content {
   background-color: white;
   width: 1000px;
-  height: 1000px;
+  height: auto;
   margin: 0 auto;
 }
 
@@ -10,12 +13,6 @@
 .logo {
   margin: 30px 0 0 150px;
 }
-/* h1 {
-  font-family: 'Sacramento', cursive;
-  font-size: 60px;
-  margin-top: 50px;
-  margin-left: 10%;
-} */
 
 form {
   margin-top: 60px;
@@ -46,6 +43,7 @@ form {
   margin: 10px;
   max-width: 300px;
   text-align: center;
+  position: relative;
 }
 
 h2 {
@@ -59,6 +57,24 @@ h2 {
   margin-left: 50%;
   opacity: 0.8;
   margin-top: -40%;
+  border-radius: 10%;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .2}
+  to {opacity: .8}
+}
+
+@keyframes fade {
+  from {opacity: .2}
+  to {opacity: .8}
 }
 
 .input-box {
@@ -83,6 +99,11 @@ h2 {
 .recipe-img {
   max-width: 80%;
   height: auto;
+  z-index: 1;
+}
+
+.recipe-img:hover {
+  opacity: 0.2;
 }
 
 .recipe-name {
@@ -126,4 +147,11 @@ label {
 h3 {
   font-family: 'Arapey', serif;
   font-size: 30px;
+}
+
+.nutrition {
+  position: absolute;
+  z-index: 0;
+  max-width: 60%;
+  margin-top: 10%;
 }
