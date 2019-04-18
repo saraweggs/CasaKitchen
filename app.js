@@ -26,7 +26,7 @@ slideshow();
   const app_key = '22ed78487597ae7e8beac2e39fc678e9';
   const url = 'https://api.edamam.com/search?';
 
-  const $modal = $('.modal');
+  const ingredientsArray = [];
 
 
 
@@ -42,10 +42,13 @@ slideshow();
       if (inputValue === '') {
         $('.container').html('<h3>Please enter a food item!</h3>');
       }
+
+      // Check boxes for diet restrictions:
     const veganCheck = $('#veganCheck').is(':checked');
     const vegetarianCheck = $('#vegetarianCheck').is(':checked');
     const glutenCheck = $('#glutenCheck').is(':checked');
 
+      // Updates API URL based on if a diet restriction is checked:
     let requestUrl = url + 'q=' + inputValue + '&app_id=' + app_id + '&app_key=' + app_key;
       if (veganCheck === true) {
         requestUrl = requestUrl + '&health=vegan';
@@ -60,10 +63,13 @@ slideshow();
     $.ajax({
       url: requestUrl,
       dataType: "jsonp",
-      success: function(data) {
+    }).then(
+      (data) => {
 
-        for (let i = 0; i < 20; i++) {
 
+        for (let i = 0; i < 6; i++) {
+
+          // Variables for each result pulled from API:
           const label = data.hits[i].recipe.label;
           const recipeUrl = data.hits[i].recipe.url;
           const recipeImg = data.hits[i].recipe.image;
@@ -73,12 +79,11 @@ slideshow();
           const carbs = data.hits[i].recipe.totalDaily.CHOCDF.quantity;
           const serves = data.hits[i].recipe.yield;
 
+          // Divides the nutrition facts by the serving size and rounds to whole number:
           const totalCals = Math.floor(calories/serves);
           const totalFat = Math.floor(fat/serves);
           const totalCarbs = Math.floor(carbs/serves);
-          const nutrition = 'This recipe has ' + totalCals + ' total calories, ' + totalFat + ' grams of fat, and ' + totalCarbs +  ' grams of carbohydrates per serving.';
-
-          console.log(totalCals);
+          const nutrition = 'This recipe has ' + totalCals + ' total calories, ' + totalFat + ' grams of fat, and ' + totalCarbs +  ' grams of carbohydrates per serving. Click to view the full ingredient list!';
 
           // Building Divs for each recipe returned:
 
@@ -89,49 +94,38 @@ slideshow();
             $recipeContainer.append($recipePic)
             const $nutritionFacts = $('<div>').addClass('nutrition');
             $nutritionFacts.text(nutrition);
-            const $ingredientsBtn = $('<button>').addClass('modalBtn').text('Click to see the ingredients!');
             $recipeContainer.append($nutritionFacts);
-            $nutritionFacts.append($ingredientsBtn);
             const $recipes = $('<a>').addClass('recipe-name').attr('href', recipeUrl);
             $recipes.text(label)
             $recipeContainer.append($recipes);
 
-      // Hover over image to show recipe nutrition facts:
 
-          const showNutrition = (event) => {
-            $(event.currentTarget).css('z-index', 1);
-          }
+}
 
-          const hideNutrition = () => {
-            $('.nutrition').css('z-index', 0);
-            $('.recipe-img').css('z-index', 1);
-          }
-
-            $('.recipe-img').hover(showNutrition, hideNutrition);
-
+      // Function to hover over image to show nutrition facts:
+      const showNutrition = (event) => {
+          $(event.currentTarget).css('z-index', 1);
         }
-      }
-    })
+      // Function to hide nutrition facts when not hovered over image:
+      const hideNutrition = () => {
+          $('.nutrition').css('z-index', 0);
+        }
+      // Hover method to call show and hide nutrition functions:
+      $('.recipe-img').hover(showNutrition, hideNutrition);
+
+
+    },
+    () => {
+      // Error message if nothing is pulled from API:
+      $('.container').html('<h3>Sorry! No recipes were found!</h3>');
+    }
+  )
+
+
+
+
+
   });
-
-
-
-  const openModal = () => {
-    $modal.css('display', 'block');
-    const $recipeList = $('<div>').addClass('ingredient-list');
-    $recipeList.text(ingredients);
-    $('.modal').append($recipeList);
-  }
-
-  $('.modalBtn').on('click', openModal)
-
-
-
-
-
-
-
-
 
 
 
