@@ -92,6 +92,7 @@ slideshow();
             const $recipePic = $('<img>').addClass('recipe-img').on('click', () => {
               $('#modal-header').empty();
               $('.recipe-img').css('z-index', 0);
+              $('.nutrition').css('z-index', -1);
               $('<p>').text(ingredients).addClass('modal-ingredients').appendTo('#modal-header');
               $('#modal').css('display', 'block');
             });
@@ -105,18 +106,14 @@ slideshow();
             $recipeContainer.append($recipes);
 
 
+            $('#close').on('click', () => {
+              $('#modal').css('display', 'none');
+              $('.nutrition').css('z-index', 0);
+              $('.recipe-img').css('z-index', 1);
+            });
+
 
 }
-
-  // Close Modal function (open Modal is defined in loop):
-  const closeModal = () => {
-    ('#modal').css('display', 'none');
-    $('.nutrition').css('z-index', 0);
-    $('.recipe-img').css('z-index', 1);
-  }
-
-  // Method to close the model when clicked:
-  $('#close').on('click', closeModal);
 
 
       // Function to hover over image to show nutrition facts:
