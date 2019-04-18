@@ -29,11 +29,11 @@ form {
   margin: 0 auto;
   max-width: 1000px;
   height: auto;
-  overflow: scroll;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   position: relative;
+  overflow: scroll;
 }
 
 .recipe-box {
@@ -93,6 +93,10 @@ h2 {
   margin-bottom: 20px;
 }
 
+.input-box:hover {
+  border: 2px solid #44A5F9;
+}
+
 .submit-button {
   font-family: 'Arapey', serif;
   font-size: 16px;
@@ -100,6 +104,10 @@ h2 {
   background-color: #FE7171;
   padding: 8px;
   border-radius: 10px;
+}
+
+.submit-button:hover {
+  background-color: #44A5F9;
 }
 
 .recipe-img {
@@ -169,6 +177,17 @@ label {
   margin-left: 5px;
 }
 
+.ingredientsBtn {
+  font-family: 'Arapey', serif;
+  font-size: 15px;
+  font-weight: 800;
+  margin-top: 20px;
+  padding: 8px;
+  background-color: #44A5F9;
+  display: block;
+  position: absolute;
+  z-index: 0;
+}
 
 h3 {
   font-family: 'Arapey', serif;
@@ -189,5 +208,6 @@ h3 {
 }
 
 @media (800px){
+  background-size: cover;
 
 }

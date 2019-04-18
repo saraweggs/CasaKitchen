@@ -59,6 +59,8 @@ slideshow();
         requestUrl = url + 'q=' + inputValue + '&app_id=' + app_id + '&app_key=' + app_key;
       };
 
+
+
     $.ajax({
       url: requestUrl,
       dataType: "jsonp",
@@ -66,7 +68,7 @@ slideshow();
       (data) => {
 
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 50; i++) {
 
           // Variables for each result pulled from API:
           const label = data.hits[i].recipe.label;
@@ -82,7 +84,7 @@ slideshow();
           const totalCals = Math.floor(calories/serves);
           const totalFat = Math.floor(fat/serves);
           const totalCarbs = Math.floor(carbs/serves);
-          const nutrition = 'This recipe has ' + totalCals + ' total calories, ' + totalFat + ' grams of fat, and ' + totalCarbs +  ' grams of carbohydrates per serving. Click to view the full ingredient list!';
+          const nutrition = 'This recipe has ' + totalCals + ' total calories, ' + totalFat + ' grams of fat, and ' + totalCarbs +  ' grams of carbohydrates per serving.';
 
           // Building Divs for each recipe returned:
 
@@ -101,11 +103,13 @@ slideshow();
             const $nutritionFacts = $('<div>').addClass('nutrition');
             $nutritionFacts.text(nutrition);
             $recipeContainer.append($nutritionFacts);
+            const $ingredientsBtn = $('<button>').addClass('ingredientsBtn').text('Click to view full ingredients!');
+            $nutritionFacts.append($ingredientsBtn);
             const $recipes = $('<a>').addClass('recipe-name').attr('href', recipeUrl);
             $recipes.text(label)
             $recipeContainer.append($recipes);
 
-            // Close Modal: 
+            // Close Modal:
             $('#close').on('click', () => {
               $('#modal').css('display', 'none');
               $('.nutrition').css('z-index', 0);
@@ -120,7 +124,6 @@ slideshow();
             })
 
 }
-
 
       // Function to hover over image to show nutrition facts:
       const showNutrition = (event) => {
