@@ -48,7 +48,7 @@ slideshow();
     const glutenCheck = $('#glutenCheck').is(':checked');
 
       // Updates API URL based on if a diet restriction is checked:
-    let requestUrl = url + 'q=' + inputValue + '&app_id=' + app_id + '&app_key=' + app_key;
+    let requestUrl = url + 'q=' + inputValue + '&app_id=' + app_id + '&app_key=' + app_key + '&from=0&to=30';
       if (veganCheck === true) {
         requestUrl = requestUrl + '&health=vegan';
       } else if (vegetarianCheck === true){
@@ -56,10 +56,11 @@ slideshow();
       } else if (glutenCheck === true) {
         requestUrl = requestUrl + '&health=gluten-free';
       } else {
-        requestUrl = url + 'q=' + inputValue + '&app_id=' + app_id + '&app_key=' + app_key;
+        requestUrl = url + 'q=' + inputValue + '&app_id=' + app_id + '&app_key=' + app_key + '&from=0&to=30';
       };
 
 
+  const getData = () => {
 
     $.ajax({
       url: requestUrl,
@@ -67,7 +68,7 @@ slideshow();
     }).then(
       (data) => {
 
-
+        console.log(data);
         for (let i = 0; i < 50; i++) {
 
           // Variables for each result pulled from API:
@@ -110,7 +111,8 @@ slideshow();
             $recipeContainer.append($recipes);
 
             // Close Modal:
-            $('#close').on('click', () => {
+            $('#close').on('click', (event) => {
+              event.preventDefault();
               $('#modal').css('display', 'none');
               $('.nutrition').css('z-index', 0);
               $('.recipe-img').css('z-index', 1);
@@ -144,8 +146,22 @@ slideshow();
     }
   )
 
+}
+
+  getData();
+
+  // INFINITE SCROLL:
+
+  // const infiniteScroll = () => {
+  //   if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+  //     getData();
+  //   }
+  // }
+  //
+  // infiniteScroll();
 
   });
+
 
 
 
