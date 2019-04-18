@@ -105,13 +105,19 @@ slideshow();
             $recipes.text(label)
             $recipeContainer.append($recipes);
 
-
+            // Close Modal: 
             $('#close').on('click', () => {
               $('#modal').css('display', 'none');
               $('.nutrition').css('z-index', 0);
               $('.recipe-img').css('z-index', 1);
             });
 
+
+            // Opens recipe site in a new tab:
+            $('.recipe-name').on('click', (event) => {
+              event.preventDefault();
+              window.open(recipeUrl, '_blank');
+            })
 
 }
 
