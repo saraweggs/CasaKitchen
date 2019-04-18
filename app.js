@@ -20,6 +20,7 @@ const slideshow = () => {
 
 slideshow();
 
+
   // GLOBAL VARIABLES FOR API:
 
   const app_id = 'e05a27a5';
@@ -139,5 +140,9 @@ slideshow();
 
 
   });
+
+
+
+
 
 });
