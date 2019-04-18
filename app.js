@@ -26,8 +26,6 @@ slideshow();
   const app_key = '22ed78487597ae7e8beac2e39fc678e9';
   const url = 'https://api.edamam.com/search?';
 
-  const ingredientsArray = [];
-
 
 
   // RECIPE SEARCH AND API CALL:
@@ -67,7 +65,7 @@ slideshow();
       (data) => {
 
 
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 20; i++) {
 
           // Variables for each result pulled from API:
           const label = data.hits[i].recipe.label;
@@ -89,7 +87,13 @@ slideshow();
 
             const $recipeContainer = $('<div>').addClass('recipe-box')
             $('.container').append($recipeContainer);
-            const $recipePic = $('<img>').addClass('recipe-img');
+            // Builds image div & gives it an on click method to pull ingredients in modal:
+            const $recipePic = $('<img>').addClass('recipe-img').on('click', () => {
+              $('#modal-header').empty();
+              $('.recipe-img').css('z-index', 0);
+              $('<p>').text(ingredients).addClass('modal-ingredients').appendTo('#modal-header');
+              $('#modal').css('display', 'block');
+            });
             $recipePic.attr('src', recipeImg);
             $recipeContainer.append($recipePic)
             const $nutritionFacts = $('<div>').addClass('nutrition');
@@ -100,7 +104,19 @@ slideshow();
             $recipeContainer.append($recipes);
 
 
+
 }
+
+  // Close Modal function (open Modal is defined in loop):
+  const closeModal = () => {
+    ('#modal').css('display', 'none');
+    $('.nutrition').css('z-index', 0);
+    $('.recipe-img').css('z-index', 1);
+  }
+
+  // Method to close the model when clicked:
+  $('#close').on('click', closeModal);
+
 
       // Function to hover over image to show nutrition facts:
       const showNutrition = (event) => {
@@ -122,12 +138,6 @@ slideshow();
   )
 
 
-
-
-
   });
-
-
-
 
 });
