@@ -264,5 +264,8 @@ h3 {
   html {
     background-size: cover;
   }
+  .logo {
+    margin: 5px 0 0 50px;
+  }
 
 }
